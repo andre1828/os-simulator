@@ -1,0 +1,19 @@
+const PROCESS_STATES = {
+  READY: 0,
+  RUNNING: 1,
+  TERMINATED: 2,
+}
+const SCHEDULING_ALGORITHMS = {
+  FIFO: 3,
+  SJF: 4,
+  ROUND_ROBIN: 5,
+}
+
+const ENUMS = {
+  PROCESS_STATES,
+  SCHEDULING_ALGORITHMS,
+}
+
+Object.freeze(ENUMS)
+
+export default ENUMS
