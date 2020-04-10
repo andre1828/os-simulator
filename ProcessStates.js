@@ -1,9 +1,0 @@
-const PROCESS_STATES = {
-  READY: 0,
-  RUNNING: 1,
-  TERMINATED: 2,
-}
-
-Object.freeze(PROCESS_STATES)
-
-export { PROCESS_STATES }

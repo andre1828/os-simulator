@@ -1,4 +1,5 @@
 import { EventBus } from "./EventBus.js"
+import OSSimulator from "./OSSimulator.js"
 
 let v = new Vue({
   el: "#app",
@@ -21,11 +22,12 @@ let v = new Vue({
     ],
   },
   methods: {
-    startSimulation: function() {
+    startSimulation: function () {
       v.$data.showModal = false
-      console.log("BOOYA")
-    }
-  }
+      var osSimulator = new OSSimulator()
+      osSimulator.run()
+    },
+  },
 })
 
 function onEvent(eventData) {
