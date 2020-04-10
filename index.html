@@ -3,103 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Process Scheduler</title>
     <link rel="stylesheet" href="./bulma.min.css" />
   </head>
   <body>
-    <button class="button">Button</button>
     <div id="app">
       <div class="container">
-        <div class="columns">
-          <div class="column">
-            <h2 class="subtitle">Tabela de processos</h2>
-            <table class="table is-fullwidth is-bordered">
-              <thead>
-                <tr>
-                  <th><abbr title="Process Id">Id</abbr></th>
-                  <th><abbr title="Process Time">Tempo total</abbr></th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th><abbr title="Process Id">Id</abbr></th>
-                  <th><abbr title="Process Time">Tempo total</abbr></th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <tr>
-                  <th>1</th>
-                  <td>
-                    <a
-                      href="https://en.wikipedia.org/wiki/Leicester_City_F.C."
-                      title="Leicester City F.C."
-                      >Leicester City</a
-                    >
-                    <strong>(C)</strong>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <div v-if="showModal">
+          <div class="modal is-active">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Configurações</p>
+              </header>
+              <section class="modal-card-body">
+                <div class="field">
+                  <label class="label">Número de cores</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="number"
+                      min="1"
+                      max="64"
+                      value="1"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Número de processos iniciais</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="number"
+                      min="0"
+                      max="10"
+                      value="0"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Algoritmo de escalonamento</label>
+                  <div class="control">
+                    <div class="select">
+                      <select>
+                        <option value="0">FIFO</option>
+                        <option value="1">SJF</option>
+                        <option value="2">Round Robin</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <footer class="modal-card-foot">
+                <button @click="startSimulation" class="button is-success">
+                  Iniciar simulação
+                </button>
+              </footer>
+            </div>
           </div>
-          <div class="column">
-            <h2 class="subtitle">Processos aptos</h2>
-            <table class="table is-fullwidth is-bordered">
-              <thead>
-                <tr>
-                  <th><abbr title="Process Id">Id</abbr></th>
-                  <th><abbr title="Process Time">Tempo total</abbr></th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th><abbr title="Process Id">Id</abbr></th>
-                  <th><abbr title="Process Time">Tempo total</abbr></th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <tr>
-                  <th>1</th>
-                  <td>
-                    <a
-                      href="https://en.wikipedia.org/wiki/Leicester_City_F.C."
-                      title="Leicester City F.C."
-                      >Leicester City</a
-                    >
-                    <strong>(C)</strong>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="column">
-            <h2 class="subtitle">Processos em execução</h2>
-            <table class="table is-fullwidth is-bordered">
-              <thead>
-                <tr>
-                  <th><abbr title="Process Id">Id</abbr></th>
-                  <th><abbr title="Process Time">Tempo</abbr></th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th><abbr title="Process Id">Id</abbr></th>
-                  <th><abbr title="Process Time">Tempo</abbr></th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <tr>
-                  <th>1</th>
-                  <td>
-                    <a
-                      href="https://en.wikipedia.org/wiki/Leicester_City_F.C."
-                      title="Leicester City F.C."
-                      >Leicester City</a
-                    >
-                    <strong>(C)</strong>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        </div>
+        <div v-else>
+          <div class="columns">
+            <div class="column">
+              <h2 class="subtitle">Tabela de processos</h2>
+              <table class="table is-fullwidth is-bordered">
+                <thead>
+                  <tr>
+                    <th><abbr title="Process Id">Id</abbr></th>
+                    <th><abbr title="Process Time">Tempo total</abbr></th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th><abbr title="Process Id">Id</abbr></th>
+                    <th><abbr title="Process Time">Tempo total</abbr></th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  <tr v-for="process in processTable">
+                    <th>{{process.id}}</th>
+                    <td>
+                      {{process.totalTime}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="column">
+              <h2 class="subtitle">Processos aptos</h2>
+              <table class="table is-fullwidth is-bordered">
+                <thead>
+                  <tr>
+                    <th><abbr title="Process Id">Id</abbr></th>
+                    <th><abbr title="Process Time">Tempo total</abbr></th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th><abbr title="Process Id">Id</abbr></th>
+                    <th><abbr title="Process Time">Tempo total</abbr></th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  <tr v-for="process in readyProcesses">
+                    <th>{{process.id}}</th>
+                    <td>
+                      {{process.totalTime}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="column">
+              <h2 class="subtitle">Processos em execução</h2>
+              <table class="table is-fullwidth is-bordered">
+                <thead>
+                  <tr>
+                    <th><abbr title="Process Id">Id</abbr></th>
+                    <th><abbr title="Process Time">Tempo restante</abbr></th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th><abbr title="Process Id">Id</abbr></th>
+                    <th><abbr title="Process Time">Tempo restante</abbr></th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  <tr v-for="process in runningProcesses">
+                    <th>{{process.id}}</th>
+                    <td>
+                      {{process.remainingTime}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
