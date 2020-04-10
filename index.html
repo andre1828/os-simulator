@@ -26,6 +26,7 @@
                       min="1"
                       max="64"
                       value="1"
+                      v-model.number="numOfCores"
                     />
                   </div>
                 </div>
@@ -38,6 +39,7 @@
                       min="0"
                       max="10"
                       value="0"
+                      v-model.number="numOfInitialProcesses"
                     />
                   </div>
                 </div>
@@ -45,7 +47,7 @@
                   <label class="label">Algoritmo de escalonamento</label>
                   <div class="control">
                     <div class="select">
-                      <select>
+                      <select v-model.number="schedulingAlgorithm">
                         <option value="3">FIFO</option>
                         <option value="4">SJF</option>
                         <option value="5">Round Robin</option>

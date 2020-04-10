@@ -5,6 +5,9 @@ let v = new Vue({
   el: "#app",
   data: {
     showModal: true,
+    numOfCores: 1,
+    numOfInitialProcesses: 0,
+    schedulingAlgorithm: 3,
     processTable: [
       { id: 0, totalTime: 20 },
       { id: 1, totalTime: 20 },
