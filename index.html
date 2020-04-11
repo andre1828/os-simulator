@@ -55,6 +55,19 @@
                     </div>
                   </div>
                 </div>
+                <div class="field" v-if="schedulingAlgorithm === 5">
+                  <label class="label">Quantum</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="number"
+                      min="2"
+                      max="20"
+                      value="2"
+                      v-model.number="quantum"
+                    />
+                  </div>
+                </div>
               </section>
               <footer class="modal-card-foot">
                 <button @click="startSimulation" class="button is-success">

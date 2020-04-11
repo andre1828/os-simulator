@@ -1,5 +1,6 @@
 import { EventBus } from "./EventBus.js"
 import OSSimulator from "./OSSimulator.js"
+import Enum from "./Enums.js"
 
 let v = new Vue({
   el: "#app",
@@ -8,6 +9,7 @@ let v = new Vue({
     numOfCores: 1,
     numOfInitialProcesses: 0,
     schedulingAlgorithm: 3,
+    quantum: 2,
     processTable: [
       { id: 0, totalTime: 20 },
       { id: 1, totalTime: 20 },
@@ -27,7 +29,14 @@ let v = new Vue({
   methods: {
     startSimulation: function () {
       v.$data.showModal = false
-      var osSimulator = new OSSimulator()
+      var osSimulator = new OSSimulator(
+        v.$data.numOfCores,
+        v.$data.schedulingAlgorithm === Enum.SCHEDULING_ALGORITHMS.ROUND_ROBIN
+          ? v.$data.quantum
+          : null
+      )
+      osSimulator.setNumOfInitialProcesses(v.$data.numOfInitialProcesses)
+      osSimulator.setSchedulingAlgorithm(v.$data.schedulingAlgorithm)
       osSimulator.run()
     },
   },

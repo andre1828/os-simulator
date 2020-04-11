@@ -1,10 +1,16 @@
+import Scheduler from "./Scheduler.js"
 export default class Kernel {
-  constructor() {
+  constructor(numOfCores) {
     this.processTable = []
-    this.cpu = []
+    this.cpu = new Array(numOfCores)
+    this.processId = 0
   }
 
-  run(){
-      console.log("kernel run")
+  run(numOfInitialProcesses) {
+    console.log("kernel run")
+    // instantiate scheduler
   }
+  createProcess() {}
+  killProcess() {}
+  runProcess() {}
 }

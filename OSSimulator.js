@@ -3,7 +3,7 @@ import Kernel from "./Kernel.js"
 
 export default class OSSimulator {
   constructor(numOfCores, quantum = 20) {
-    this.kernel = new Kernel()
+    this.kernel = null
     this.numOfCores = numOfCores
     this.quantum = quantum
     this.numOfInitialProcesses = null
@@ -11,7 +11,8 @@ export default class OSSimulator {
   }
 
   run() {
-    this.kernel.run()
+    this.kernel = new Kernel(this.numOfCores)
+    this.kernel.run(this.numOfInitialProcesses)
   }
   createRandomProcess() {
     // create process
