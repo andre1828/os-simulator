@@ -24,6 +24,7 @@ export default class OSSimulator {
   setSchedulingAlgorithm(schedulingAlgorithm) {
     this.schedulingAlgorithm = schedulingAlgorithm
   }
+  tick() {
+      this.kernel.tick()
+  }
 }
-
-EventBus.$emit("coffee", "coffee is dope")

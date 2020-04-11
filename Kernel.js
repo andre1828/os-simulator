@@ -1,4 +1,4 @@
-import Scheduler from "./Scheduler.js"
+import Scheduler from "./FIFOScheduler.js"
 import Process from "./Process.js"
 export default class Kernel {
   constructor(numOfCores, scheduler) {
@@ -14,6 +14,8 @@ export default class Kernel {
     for (let i = 0; i < numOfInitialProcesses; i++) {
       this.createProcess(++this.processId, Math.floor(Math.random() * 21))
     }
+
+    this.scheduler.run()
   }
   createProcess(id, totalTime) {
     var newProcess = new Process(id, totalTime)
@@ -23,4 +25,7 @@ export default class Kernel {
   }
   killProcess() {}
   runProcess() {}
+  tick() {
+    this.scheduler.tick()
+  }
 }

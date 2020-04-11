@@ -4,10 +4,15 @@ export default class FIFOScheduler {
     this.readyQueue = []
   }
 
-  run() {}
+  run() {
+    clock.postMessage("tick")
+  }
   insertProcess(newProcess) {
     this.readyQueue.unshift(newProcess)
   }
   scheduleProcess() {}
   descheduleProcess() {}
+  tick() {
+    console.log("scheduler tick")
+  }
 }
