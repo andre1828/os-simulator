@@ -1,8 +1,9 @@
+import Enum from "./Enums.js"
 export default class Process {
-    constructor(id, totalTime, state) {
-        this.id = id
-        this.totalTime = totalTime
-        this.state = state
-        this.remainingTime = totalTime
-    }
+  constructor(id, totalTime) {
+    this.id = id
+    this.totalTime = totalTime
+    this.state = Enum.PROCESS_STATES.READY
+    this.remainingTime = totalTime
+  }
 }
