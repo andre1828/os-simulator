@@ -1,11 +1,13 @@
-export default class Scheduler {
+export default class FIFOScheduler {
   constructor(numOfCores) {
     this.cores = new Array(numOfCores)
     this.readyQueue = []
   }
 
   run() {}
-  insertProcess() {}
+  insertProcess(newProcess) {
+    this.readyQueue.unshift(newProcess)
+  }
   scheduleProcess() {}
   descheduleProcess() {}
 }
