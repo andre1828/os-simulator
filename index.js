@@ -17,11 +17,7 @@ let v = new Vue({
       { id: 1, totalTime: 20 },
       { id: 2, totalTime: 20 },
     ],
-    runningProcesses: [
-      { id: 0, remainingTime: 20 },
-      { id: 1, remainingTime: 20 },
-      { id: 2, remainingTime: 20 },
-    ],
+    cores: [],
     readyQueue: [
       { id: 0, totalTime: 20 },
       { id: 1, totalTime: 20 },
@@ -51,3 +47,4 @@ EventBus.$on(
   "UPDATE_READY_QUEUE",
   (newReadyQueue) => (v.$data.readyQueue = newReadyQueue)
 )
+EventBus.$on("UPDATE_CORES", (newCores) => (v.$data.cores = newCores))

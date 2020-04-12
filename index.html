@@ -130,23 +130,28 @@
               </table>
             </div>
             <div class="column">
-              <h2 class="subtitle">Processos em execução</h2>
+              <h2 class="subtitle">Cores</h2>
               <table class="table is-fullwidth is-bordered">
                 <thead>
                   <tr>
-                    <th><abbr title="Process Id">Id</abbr></th>
+                    <th><abbr title="Core">Core</abbr></th>
+                    <th><abbr title="Process Id">Processo</abbr></th>
                     <th><abbr title="Process Time">Tempo restante</abbr></th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                    <th><abbr title="Process Id">Id</abbr></th>
+                    <th><abbr title="Core">Core</abbr></th>
+                    <th><abbr title="Process Id">Processo</abbr></th>
                     <th><abbr title="Process Time">Tempo restante</abbr></th>
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr v-for="process in runningProcesses">
-                    <th>{{process.id}}</th>
+                  <tr v-for="(process, core) in cores">
+                    <th>{{core}}</th>
+                    <td>
+                      {{process.id}}
+                    </td>
                     <td>
                       {{process.remainingTime}}
                     </td>
