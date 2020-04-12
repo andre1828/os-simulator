@@ -22,7 +22,7 @@ let v = new Vue({
       { id: 1, remainingTime: 20 },
       { id: 2, remainingTime: 20 },
     ],
-    readyProcesses: [
+    readyQueue: [
       { id: 0, totalTime: 20 },
       { id: 1, totalTime: 20 },
       { id: 2, totalTime: 20 },
@@ -34,20 +34,20 @@ let v = new Vue({
       osSimulator = new OSSimulator(
         v.$data.numOfCores,
         v.$data.schedulingAlgorithm === Enum.SCHEDULING_ALGORITHMS.ROUND_ROBIN
-        ? v.$data.quantum
-        : null
-        )
-        osSimulator.setNumOfInitialProcesses(v.$data.numOfInitialProcesses)
-        osSimulator.setSchedulingAlgorithm(v.$data.schedulingAlgorithm)
-        osSimulator.run()
-      },
+          ? v.$data.quantum
+          : null
+      )
+      osSimulator.setNumOfInitialProcesses(v.$data.numOfInitialProcesses)
+      osSimulator.setSchedulingAlgorithm(v.$data.schedulingAlgorithm)
+      osSimulator.run()
     },
-  })
-  
-  function onEvent(eventData) {
-    v.$data.message = eventData
-  }
-  
-  clock.onmessage = function() { osSimulator.tick()}
-  
-  
+  },
+})
+
+clock.onmessage = function () {
+  osSimulator.tick()
+}
+EventBus.$on(
+  "UPDATE_READY_QUEUE",
+  (newReadyQueue) => (v.$data.readyQueue = newReadyQueue)
+)
