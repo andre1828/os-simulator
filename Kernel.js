@@ -1,11 +1,13 @@
 import Scheduler from "./FIFOScheduler.js"
 import Process from "./Process.js"
+import { EventBus } from "./EventBus.js"
 export default class Kernel {
   constructor(numOfCores, scheduler) {
     this.processTable = []
     this.cpu = new Array(numOfCores)
     this.processId = 0
     this.scheduler = new Scheduler(numOfCores)
+    EventBus.$on("KILL_PROCESS", this.killProcess.bind(this))
   }
 
   run(numOfInitialProcesses) {
@@ -23,7 +25,14 @@ export default class Kernel {
     // give process to scheduler
     this.scheduler.insertProcess(newProcess)
   }
-  killProcess() {}
+  killProcess(processId) {
+    console.log("kill process: " + processId)
+    var processIndex = this.processTable.findIndex(
+      (process) => process.id === processId
+    )
+    this.processTable[processIndex] = null
+    // EventBus.$emit("UPDATE_PROCESS_TABLE", this.processTable)
+  }
   runProcess() {}
   tick() {
     this.scheduler.tick()

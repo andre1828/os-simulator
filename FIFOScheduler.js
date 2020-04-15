@@ -9,7 +9,7 @@ export default class FIFOScheduler {
     // start clock
     clock.postMessage("tick")
     // schedule processes
-    for (let i = 0; i < this.readyQueue.length; i++) {
+    while (this.readyQueue.length !== 0) {
       this.scheduleProcess()
     }
   }
@@ -21,18 +21,28 @@ export default class FIFOScheduler {
     for (let i = 0; i < this.cores.length; i++) {
       if (this.cores[i] === null) {
         this.cores[i] = this.readyQueue.pop()
+        // this.cores[i] = this.readyQueue[this.readyQueue.length - 1 - i]
+        // this.readyQueue[this.readyQueue.length - 1 - i] = null
         break
       }
     }
+    EventBus.$emit("UPDATE_READY_QUEUE", this.readyQueue)
+    EventBus.$emit("UPDATE_CORES", this.cores)
   }
-  descheduleProcess() {}
+  descheduleProcess(core) {
+    const processId = this.cores[core].id
+    this.cores[core] = null
+    console.log("sending message to kill proc:" + processId)
+    EventBus.$emit("KILL_PROCESS", processId)
+  }
   tick() {
     console.log("scheduler tick")
     for (let i = 0; i < this.cores.length; i++) {
       if (this.cores[i]) {
-        this.cores[i].remainingTime--
+        this.cores[i].remainingTime > 0 && this.cores[i].remainingTime--
         if (this.cores[i].remainingTime === 0) {
-          // kill process
+          // deschedule process
+          this.descheduleProcess(i)
         }
       }
     }
