@@ -22,6 +22,7 @@ export default class Kernel {
   createProcess(id, totalTime) {
     var newProcess = new Process(id, totalTime)
     this.processTable.push(newProcess)
+    EventBus.$emit("UPDATE_PROCESS_TABLE", this.processTable)
     // give process to scheduler
     this.scheduler.insertProcess(newProcess)
   }
@@ -31,7 +32,7 @@ export default class Kernel {
       (process) => process.id === processId
     )
     this.processTable[processIndex] = null
-    // EventBus.$emit("UPDATE_PROCESS_TABLE", this.processTable)
+    EventBus.$emit("UPDATE_PROCESS_TABLE", this.processTable)
   }
   runProcess() {}
   tick() {

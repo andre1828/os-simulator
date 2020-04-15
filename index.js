@@ -48,3 +48,5 @@ EventBus.$on(
   (newReadyQueue) => (v.$data.readyQueue = newReadyQueue)
 )
 EventBus.$on("UPDATE_CORES", (newCores) => (v.$data.cores = newCores))
+
+EventBus.$on("UPDATE_PROCESS_TABLE", (newProcessTable) => (v.$data.processTable = newProcessTable))
