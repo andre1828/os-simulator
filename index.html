@@ -96,9 +96,9 @@
                 </tfoot>
                 <tbody>
                   <tr v-for="process in processTable">
-                    <th>{{process.id}}</th>
+                    <th>{{process ? process.id : ""}}</th>
                     <td>
-                      {{process.totalTime}}
+                      {{ process ? process.totalTime : ""}}
                     </td>
                   </tr>
                 </tbody>
