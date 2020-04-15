@@ -106,7 +106,7 @@
             </div>
             <div class="column">
               <h2 class="subtitle">Processos aptos</h2>
-              <table class="table is-fullwidth is-bordered">
+              <table class="table is-fullwidth is-bordered" v-if="readyQueue.length > 0">
                 <thead>
                   <tr>
                     <th><abbr title="Process Id">Id</abbr></th>
@@ -121,13 +121,15 @@
                 </tfoot>
                 <tbody>
                   <tr v-for="process in readyQueue">
-                    <th>{{process.id}}</th>
+                    <th>{{process ? process.id : "#"}}</th>
                     <td>
-                      {{process.totalTime}}
+                      {{ process ? process.totalTime : "#" }}
                     </td>
                   </tr>
+
                 </tbody>
               </table>
+              <p v-else >nenhum processo apto</p>
             </div>
             <div class="column">
               <h2 class="subtitle">Cores</h2>
@@ -150,10 +152,10 @@
                   <tr v-for="(process, core) in cores">
                     <th>{{core}}</th>
                     <td>
-                      {{process.id}}
+                      {{process ? process.id : "ocioso"}}
                     </td>
                     <td>
-                      {{process.remainingTime}}
+                      {{process ?process.remainingTime : "ocioso"}}
                     </td>
                   </tr>
                 </tbody>
