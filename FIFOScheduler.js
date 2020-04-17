@@ -19,11 +19,10 @@ export default class FIFOScheduler {
   }
   scheduleProcess() {
     for (let i = 0; i < this.cores.length; i++) {
-      if (this.cores[i] === null) {
+      if (this.cores[i] === null && this.readyQueue.length) {
         this.cores[i] = this.readyQueue.pop()
         // this.cores[i] = this.readyQueue[this.readyQueue.length - 1 - i]
         // this.readyQueue[this.readyQueue.length - 1 - i] = null
-        break
       }
     }
     EventBus.$emit("UPDATE_READY_QUEUE", this.readyQueue)
@@ -43,10 +42,10 @@ export default class FIFOScheduler {
         if (this.cores[i].remainingTime === 0) {
           // deschedule process
           this.descheduleProcess(i)
-          this.scheduleProcess()
         }
       }
     }
+    this.scheduleProcess()
     EventBus.$emit("UPDATE_CORES", this.cores)
   }
 }
