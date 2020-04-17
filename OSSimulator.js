@@ -28,7 +28,7 @@ export default class OSSimulator {
     this.kernel.tick()
     this.createRandomProcess(
       ++this.kernel.processId,
-      Math.ceil(Math.random() * 21)
+      Math.floor(Math.random() * 21) || 1
     )
   }
 }

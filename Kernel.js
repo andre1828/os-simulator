@@ -14,7 +14,7 @@ export default class Kernel {
     console.log("kernel run")
     // create initial processes
     for (let i = 0; i < numOfInitialProcesses; i++) {
-      this.createProcess(++this.processId, Math.floor(Math.random() * 21))
+      this.createProcess(++this.processId, Math.floor(Math.random() * 21) || 1)
     }
 
     this.scheduler.run()
