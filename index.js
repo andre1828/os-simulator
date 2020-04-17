@@ -37,16 +37,23 @@ let v = new Vue({
       osSimulator.setSchedulingAlgorithm(v.$data.schedulingAlgorithm)
       osSimulator.run()
     },
+    toggleSimulation: function () {
+      clock.postMessage("toggleSimulation")
+    },
   },
 })
 
 clock.onmessage = function () {
   osSimulator.tick()
 }
+
 EventBus.$on(
   "UPDATE_READY_QUEUE",
   (newReadyQueue) => (v.$data.readyQueue = newReadyQueue)
 )
 EventBus.$on("UPDATE_CORES", (newCores) => (v.$data.cores = newCores))
 
-EventBus.$on("UPDATE_PROCESS_TABLE", (newProcessTable) => (v.$data.processTable = newProcessTable))
+EventBus.$on(
+  "UPDATE_PROCESS_TABLE",
+  (newProcessTable) => (v.$data.processTable = newProcessTable)
+)

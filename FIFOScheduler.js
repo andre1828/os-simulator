@@ -9,7 +9,7 @@ export default class FIFOScheduler {
     // start clock
     clock.postMessage("tick")
     // schedule processes
-    while (this.readyQueue.length !== 0) {
+    for (let i = 0; i < this.cores.length; i++) {
       this.scheduleProcess()
     }
   }
@@ -43,6 +43,7 @@ export default class FIFOScheduler {
         if (this.cores[i].remainingTime === 0) {
           // deschedule process
           this.descheduleProcess(i)
+          this.scheduleProcess()
         }
       }
     }
