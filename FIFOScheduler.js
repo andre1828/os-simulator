@@ -8,10 +8,6 @@ export default class FIFOScheduler {
   run() {
     // start clock
     clock.postMessage("tick")
-    // schedule processes
-    for (let i = 0; i < this.cores.length; i++) {
-      this.scheduleProcess()
-    }
   }
   insertProcess(newProcess) {
     this.readyQueue.unshift(newProcess)
