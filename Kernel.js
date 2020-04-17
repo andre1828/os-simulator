@@ -31,7 +31,7 @@ export default class Kernel {
     var processIndex = this.processTable.findIndex(
       (process) => process.id === processId
     )
-    this.processTable[processIndex] = {}
+    this.processTable.splice(processIndex, 1)
     EventBus.$emit("UPDATE_PROCESS_TABLE", this.processTable)
   }
   runProcess() {}

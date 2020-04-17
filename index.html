@@ -97,9 +97,9 @@
                 </tfoot>
                 <tbody>
                   <tr v-for="process in processTable">
-                    <th>{{process ? process.id : ""}}</th>
+                    <th>{{ process ? process.id : "#" }}</th>
                     <td>
-                      {{ process ? process.totalTime : ""}}
+                      {{ process ? process.totalTime : "#"}}
                     </td>
                   </tr>
                 </tbody>
@@ -107,7 +107,10 @@
             </div>
             <div class="column">
               <h2 class="subtitle">Processos aptos</h2>
-              <table class="table is-fullwidth is-bordered" v-if="readyQueue.length > 0">
+              <table
+                class="table is-fullwidth is-bordered"
+                v-if="readyQueue.length > 0"
+              >
                 <thead>
                   <tr>
                     <th><abbr title="Process Id">Id</abbr></th>
@@ -127,10 +130,9 @@
                       {{ process ? process.totalTime : "#" }}
                     </td>
                   </tr>
-
                 </tbody>
               </table>
-              <p v-else >nenhum processo apto</p>
+              <p v-else>nenhum processo apto</p>
             </div>
             <div class="column">
               <h2 class="subtitle">Cores</h2>
