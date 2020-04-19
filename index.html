@@ -9,6 +9,7 @@
   <body>
     <div id="app">
       <div class="container">
+        <h2 v-if="!showModal" class="title is-2">{{schedulingAlgorithmName}} </h2>
         <div v-if="showModal">
           <div class="modal is-active">
             <div class="modal-background"></div>

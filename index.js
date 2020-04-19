@@ -41,6 +41,21 @@ let v = new Vue({
       clock.postMessage("toggleSimulation")
     },
   },
+  computed: {
+    schedulingAlgorithmName() {
+      switch (v.$data.schedulingAlgorithm) {
+        case 3:
+          return "FIFO"
+          break
+        case 4:
+          return "SJF"
+        case 5:
+          return "Round Robin"
+        default:
+          break
+      }
+    },
+  },
 })
 
 clock.onmessage = function () {
