@@ -11,7 +11,7 @@ export default class OSSimulator {
   }
 
   run() {
-    this.kernel = new Kernel(this.numOfCores)
+    this.kernel = new Kernel(this.numOfCores, this.schedulingAlgorithm)
     this.kernel.run(this.numOfInitialProcesses)
   }
   createRandomProcess(processId, totalTime) {

@@ -1,12 +1,25 @@
-import Scheduler from "./FIFOScheduler.js"
+import FIFOScheduler from "./FIFOScheduler.js"
+import SJFScheduler from "./SJFScheduler.js"
 import Process from "./Process.js"
 import { EventBus } from "./EventBus.js"
+
 export default class Kernel {
-  constructor(numOfCores, scheduler) {
+  constructor(numOfCores, schedulingAlgorithm) {
     this.processTable = []
     this.cpu = new Array(numOfCores)
     this.processId = 0
-    this.scheduler = new Scheduler(numOfCores)
+    switch (schedulingAlgorithm) {
+      case 3:
+        this.scheduler = new FIFOScheduler(numOfCores)
+        break
+      case 4:
+        this.scheduler = new SJFScheduler(numOfCores)
+        break
+      // case 5:
+        // this.scheduler = new RoundRobinScheduler(numOfCores)
+      default:
+        break
+    }
     EventBus.$on("KILL_PROCESS", this.killProcess.bind(this))
   }
 
