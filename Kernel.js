@@ -1,10 +1,11 @@
 import FIFOScheduler from "./FIFOScheduler.js"
 import SJFScheduler from "./SJFScheduler.js"
+import RoundRobinScheduler from "./RoundRobinScheduler.js"
 import Process from "./Process.js"
 import { EventBus } from "./EventBus.js"
 
 export default class Kernel {
-  constructor(numOfCores, schedulingAlgorithm) {
+  constructor(numOfCores, schedulingAlgorithm, quantum) {
     this.processTable = []
     this.cpu = new Array(numOfCores)
     this.processId = 0
@@ -15,8 +16,8 @@ export default class Kernel {
       case 4:
         this.scheduler = new SJFScheduler(numOfCores)
         break
-      // case 5:
-        // this.scheduler = new RoundRobinScheduler(numOfCores)
+      case 5:
+        this.scheduler = new RoundRobinScheduler(numOfCores, quantum)
       default:
         break
     }
