@@ -12,17 +12,9 @@ let v = new Vue({
     numOfInitialProcesses: 0,
     schedulingAlgorithm: 3,
     quantum: 2,
-    processTable: [
-      { id: 0, totalTime: 20 },
-      { id: 1, totalTime: 20 },
-      { id: 2, totalTime: 20 },
-    ],
+    processTable: [],
     cores: [],
-    readyQueue: [
-      { id: 0, totalTime: 20 },
-      { id: 1, totalTime: 20 },
-      { id: 2, totalTime: 20 },
-    ],
+    readyQueue: [],
   },
   methods: {
     startSimulation: function () {
