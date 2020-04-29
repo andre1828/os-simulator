@@ -30,9 +30,9 @@ export default class OSSimulator {
   }
   tick() {
     this.kernel.tick()
-    // this.createRandomProcess(
-    //   ++this.kernel.processId,
-    //   Math.floor(Math.random() * 21) || 1
-    // )
+    this.createRandomProcess(
+      ++this.kernel.processId,
+      Math.floor(Math.random() * 21) || 1
+    )
   }
 }
